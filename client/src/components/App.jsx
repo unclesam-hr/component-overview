@@ -18,6 +18,13 @@ export default class App extends Component {
   handleOverview = (e) => {
     const el = document.getElementsByClassName("overview");
     const content = el[0].nextElementSibling;
+    const allOpenedCollapsibles = document.getElementsByClassName("collapsible");
+    for (let i = 0; i < allOpenedCollapsibles.length; i++) {
+      let oldContent = allOpenedCollapsibles[i].nextElementSibling;
+      if (oldContent.style.display === "block") {
+        oldContent.style.display = "none";
+      }
+    }
     this.setState({
       overviewActive: !this.state.overviewActive,
       detailsActive: false,
@@ -33,6 +40,13 @@ export default class App extends Component {
   handleDetails = (e) => {
     const el = document.getElementsByClassName("details");
     const content = el[0].nextElementSibling;
+    const allOpenedCollapsibles = document.getElementsByClassName("collapsible");
+    for (let i = 0; i < allOpenedCollapsibles.length; i++) {
+      let oldContent = allOpenedCollapsibles[i].nextElementSibling;
+      if (oldContent.style.display === "block") {
+        oldContent.style.display = "none";
+      }
+    }
     this.setState({
       overviewActive: false,
       detailsActive: !this.state.detailsActive,
@@ -48,6 +62,13 @@ export default class App extends Component {
   handleShipping = (e) => {
     const el = document.getElementsByClassName("shipping");
     const content = el[0].nextElementSibling;
+    const allOpenedCollapsibles = document.getElementsByClassName("collapsible");
+    for (let i = 0; i < allOpenedCollapsibles.length; i++) {
+      let oldContent = allOpenedCollapsibles[i].nextElementSibling;
+      if (oldContent.style.display === "block") {
+        oldContent.style.display = "none";
+      }
+    }
     this.setState({
       overviewActive: false,
       detailsActive: false,
@@ -119,7 +140,7 @@ export default class App extends Component {
         </div>
         <div onClick={this.handleShipping}>
         <button className={this.state.shippingActive ? 'collapsible shipping active': 'collapsible shipping'}>SHIPPING + RETURNS</button>
-          <div className="content">
+          <div className="content shipping">
             <p></p>
             <h4>FRONT DOOR DELIVERY</h4>
             <p>With Front Door Delivery, your item ships from our Distribution Center by UPS and arrives to your home within 4-5 business days of order receipt.</p>
