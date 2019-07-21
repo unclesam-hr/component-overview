@@ -41,6 +41,7 @@ export default class App extends Component {
         <div>
           <button onClick={this.handleClick} className={this.state.overviewActive ? 'collapsible overview active': 'collapsible overview'}>OVERVIEW</button>
             <div className={this.state.overviewActive ? 'content content-show': 'content content-hide'}>
+              <p></p>
               <p>Upholstered in your choice of leather, our Carlo Mid-Century Chair echoes the dramatic, expressive lines of Italian mid-century design. We gave it a slightly pitched back, angled arms and plush cushions that sit within the frame to deliver tons of comfort without the bulk.</p>
               <h4>KEY DETAILS</h4>
               <ul>
@@ -93,8 +94,8 @@ export default class App extends Component {
             </div>
         </div>
         <div>
-        <button onClick={this.handleClick} className={this.state.shippingActive ? 'collapsible shipping active': 'collapsible shipping'}>SHIPPING + RETURNS</button>
-          <div className={this.state.shippingActive ? 'content content-show': 'content content-hide'}>
+        <button onClick={this.handleClick} className={this.state.shippingActive ? 'collapsible active': 'collapsible'}>SHIPPING + RETURNS</button>
+          <div className={this.state.shippingActive ? 'content content-show shipping': 'content content-hide shipping'}>
             <p></p>
             <h4>FRONT DOOR DELIVERY</h4>
             <p>With Front Door Delivery, your item ships from our Distribution Center by UPS and arrives to your home within 4-5 business days of order receipt.</p>
