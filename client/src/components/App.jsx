@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       showOverview: false,
       showDetails: false,
@@ -15,78 +13,34 @@ export default class App extends Component {
     }
   }
 
-  handleOverview = (e) => {
-    const el = document.getElementsByClassName("overview");
-    const content = el[0].nextElementSibling;
-    const allOpenedCollapsibles = document.getElementsByClassName("collapsible");
-    for (let i = 0; i < allOpenedCollapsibles.length; i++) {
-      let oldContent = allOpenedCollapsibles[i].nextElementSibling;
-      if (oldContent.style.display === "block") {
-        oldContent.style.display = "none";
-      }
-    }
-    this.setState({
-      overviewActive: !this.state.overviewActive,
-      detailsActive: false,
-      shippingActive: false,
-    });
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  }
-
-  handleDetails = (e) => {
-    const el = document.getElementsByClassName("details");
-    const content = el[0].nextElementSibling;
-    const allOpenedCollapsibles = document.getElementsByClassName("collapsible");
-    for (let i = 0; i < allOpenedCollapsibles.length; i++) {
-      let oldContent = allOpenedCollapsibles[i].nextElementSibling;
-      if (oldContent.style.display === "block") {
-        oldContent.style.display = "none";
-      }
-    }
-    this.setState({
-      overviewActive: false,
-      detailsActive: !this.state.detailsActive,
-      shippingActive: false
-    });
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  }
-
-  handleShipping = (e) => {
-    const el = document.getElementsByClassName("shipping");
-    const content = el[0].nextElementSibling;
-    const allOpenedCollapsibles = document.getElementsByClassName("collapsible");
-    for (let i = 0; i < allOpenedCollapsibles.length; i++) {
-      let oldContent = allOpenedCollapsibles[i].nextElementSibling;
-      if (oldContent.style.display === "block") {
-        oldContent.style.display = "none";
-      }
-    }
-    this.setState({
-      overviewActive: false,
-      detailsActive: false,
-      shippingActive: !this.state.shippingActive
-    });
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
+  handleClick = (e) => {
+    if (e.target.textContent === "OVERVIEW") {
+      this.setState({
+        overviewActive: !this.state.overviewActive,
+        detailsActive: false,
+        shippingActive: false,
+      });
+    } else if (e.target.textContent === "DETAILS + DIMENSIONS") {
+      this.setState({
+        overviewActive: false,
+        detailsActive: !this.state.detailsActive,
+        shippingActive: false
+      });
+    } else if (e.target.textContent === "SHIPPING + RETURNS") {
+      this.setState({
+        overviewActive: false,
+        detailsActive: false,
+        shippingActive: !this.state.shippingActive
+      });
     }
   }
 
   render() {
     return (
       <div id="overview-main">
-        <div onClick={this.handleOverview}>
-          <button className={this.state.overviewActive ? 'collapsible overview active': 'collapsible overview'}>OVERVIEW</button>
-            <div className="content">
+        <div>
+          <button onClick={this.handleClick} className={this.state.overviewActive ? 'collapsible overview active': 'collapsible overview'}>OVERVIEW</button>
+            <div className={this.state.overviewActive ? 'content content-show': 'content content-hide'}>
               <p>Upholstered in your choice of leather, our Carlo Mid-Century Chair echoes the dramatic, expressive lines of Italian mid-century design. We gave it a slightly pitched back, angled arms and plush cushions that sit within the frame to deliver tons of comfort without the bulk.</p>
               <h4>KEY DETAILS</h4>
               <ul>
@@ -105,9 +59,9 @@ export default class App extends Component {
               </ul>
             </div>
         </div>
-        <div onClick={this.handleDetails}>
-          <button className={this.state.detailsActive ? 'collapsible details active': 'collapsible details'}>DETAILS + DIMENSIONS</button>
-            <div className="content">
+        <div>
+          <button onClick={this.handleClick} className={this.state.detailsActive ? 'collapsible details active': 'collapsible details'}>DETAILS + DIMENSIONS</button>
+            <div className={this.state.detailsActive ? 'content content-show': 'content content-hide'}>
               <p></p>
               <h4>DETAILED SPECIFICATIONS</h4>
               <ul>
@@ -138,9 +92,9 @@ export default class App extends Component {
               <p>To minimize drying and cracking, do not place in direct sunlight or near a heat source. Dust and vacuum regularly. Rub out minor scratches lightly with a finger. For oil-based spots and spills, wipe up any excess with a clean, dry cloth. Do not apply water. Rather leave the spot alone. In most cases the spot should dissipate into the leather after a period of time. For permanent stains or thorough cleanings, we recommend contacting a leather specialist. For periodic cleaning and maintenance, we recommend Mohawk Leather Repair Kits (available for purchase in store and online).</p>
             </div>
         </div>
-        <div onClick={this.handleShipping}>
-        <button className={this.state.shippingActive ? 'collapsible shipping active': 'collapsible shipping'}>SHIPPING + RETURNS</button>
-          <div className="content shipping">
+        <div>
+        <button onClick={this.handleClick} className={this.state.shippingActive ? 'collapsible shipping active': 'collapsible shipping'}>SHIPPING + RETURNS</button>
+          <div className={this.state.shippingActive ? 'content content-show': 'content content-hide'}>
             <p></p>
             <h4>FRONT DOOR DELIVERY</h4>
             <p>With Front Door Delivery, your item ships from our Distribution Center by UPS and arrives to your home within 4-5 business days of order receipt.</p>
@@ -171,7 +125,7 @@ export default class App extends Component {
                 <li>For further assistance, please call our customer service department at 1.888.922.4119 or send an email to <a>customerservice@westelm.com</a>.</li>
               </ul>
           </div>
-      </div>
+        </div>
       </div>
     )
   }
